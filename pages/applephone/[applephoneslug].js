@@ -2,16 +2,16 @@ import React, { useState } from 'react';
 import { AiOutlineMinus, AiOutlinePlus, AiFillStar, AiOutlineStar } from 'react-icons/ai';
 
 import { client, urlFor } from '../../lib/client';
-import { Product } from '../../components';
+import { ApplePhone } from '../../components';
 import { useStateContext } from '../../context/StateContext';
 
-const ProductDetails = ({ product, products }) => {
-  const { image, name, details, price } = product;
+const ProductDetails = ({ applephone, applephones }) => {
+  const { image, name, details, price } = applephone;
   const [index, setIndex] = useState(0);
   const { decQty, incQty, qty, onAdd, setShowCart } = useStateContext();
 
   const handleBuyNow = () => {
-    onAdd(product, qty);
+    onAdd(applephone, qty);
 
     setShowCart(true);
   }
@@ -61,7 +61,7 @@ const ProductDetails = ({ product, products }) => {
             </p>
           </div>
           <div className="buttons">
-            <button type="button" className="add-to-cart" onClick={() => onAdd(product, qty)}>Add to Cart</button>
+            <button type="button" className="add-to-cart" onClick={() => onAdd(applephone, qty)}>Add to Cart</button>
             <button type="button" className="buy-now" onClick={handleBuyNow}>Buy Now</button>
           </div>
         </div>
@@ -71,8 +71,8 @@ const ProductDetails = ({ product, products }) => {
           <h2>You may also like</h2>
           <div className="marquee">
             <div className="maylike-products-container track">
-              {products.map((item) => (
-                <Product key={item._id} product={item} />
+              {applephones.map((item) => (
+                <ApplePhone key={item._id} applephone={item} />
               ))}
             </div>
           </div>
@@ -82,18 +82,18 @@ const ProductDetails = ({ product, products }) => {
 }
 
 export const getStaticPaths = async () => {
-  const query = `*[_type == "product"] {
+  const query = `*[_type == "applephone"] {
     slug {
       current
     }
   }
   `;
 
-  const products = await client.fetch(query);
+  const applephones = await client.fetch(query);
 
-  const paths = products.map((product) => ({
+  const paths = applephones.map((applephone) => ({
     params: { 
-      slug: product.slug.current
+      applephoneslug: applephone.slug.current
     }
   }));
 
@@ -103,18 +103,20 @@ export const getStaticPaths = async () => {
   }
 }
 
-export const getStaticProps = async ({ params: { slug }}) => {
-  const query = `*[_type == "product" && slug.current == '${slug}'][0]`;
-  const productsQuery = '*[_type == "product"]'
+export const getStaticProps = async ({ params: { applephoneslug }}) => {
+  const query = `*[_type == "applephone" && slug.current == '${applephoneslug}'][0]`;
+  const applephonesQuery = '*[_type == "applephone"]'
   
-  const product = await client.fetch(query);
-  const products = await client.fetch(productsQuery);
+  const applephone = await client.fetch(query);
+  const applephones = await client.fetch(applephonesQuery);
 
-  console.log(product);
+  console.log(applephone);
 
   return {
-    props: { products, product }
+    props: { applephones, applephone }
   }
 }
 
 export default ProductDetails
+
+

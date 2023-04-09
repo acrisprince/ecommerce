@@ -32,6 +32,53 @@ width: 100%;
   margin: 6px 18px;
   position: relative;
 }
+
+.dropdown {
+  float: left;
+  overflow: hidden;
+}
+
+.dropdown .dropbtn {
+  font-size: 16px;
+  border: none;
+  outline: none;
+  color: rgb(71, 70, 70);
+  padding: 14px 16px;
+  background-color: inherit;
+  font-family: inherit; 
+  margin: 0; 
+}
+
+.content-of-drop-down{
+  display: none;
+  position: absolute;
+  background-color: #f9f9f9;
+  min-width: 160px;
+  box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+  z-index: 1;
+}
+.content-of-drop-down a{
+  float: none;
+  color: black;
+  padding: 12px 16px;
+  text-decoration: none;
+  display: block;
+  text-align: left;
+}
+.content-of-drop-down a:hover{
+  background-color: #ddd;
+
+}
+
+.dropdown:hover .content-of-drop-down {
+  display: block;
+}
+
+.navbar-container .icon {
+  display: none;
+}
+
+
 .marquee-text{
   font-size: 29px;
   font-weight: 600;
@@ -66,7 +113,8 @@ width: 100%;
 }
 .logo{
   color: gray;
-  font-size: 18px;
+  font-size: 20px;
+  font-weight: 1000;
 
 }
 .cart-icon{
@@ -760,4 +808,51 @@ margin-top: 160px;
   width: 300px;
   margin: auto;
 }
+
+.navbar-container .logo:not(:first-child), .dropdown .dropbtn {
+  display: none;
+}
+.navbar-container a.icon {
+  float: right;
+  display: block;
+}
+
+.navbar-container.responsive a.icon {
+  position: absolute;
+  padding: 50px;  
+}
+
+.icon{
+  font-size: 25px;
+
+}
+
+.navbar-container.responsive a {
+  float: none;
+  display: block;
+  text-align: left;
+}
+
+
+.navbar-container.responsive .dropdown {float: none;}
+  .navbar-container.responsive .content-of-drop-down{position: relative;}
+  .navbar-container.responsive .dropdown .dropbtn {
+    display: block;
+    width: 100%;
+    text-align: center;
+  }
+
+  .navbar-container {
+    flex-wrap: wrap;
+  }
+  .dropdown {
+    flex-basis: 100%;
+  }
+  .dropdown .content-of-drop-down {
+    display: none;
+  }
+  .dropdown:hover .content-of-drop-down {
+    display: block;
+  }
+
 }
